@@ -1,0 +1,388 @@
+Matplotlib Plots:
+
+Line Plot-Main Use: Visualize trends over continuous data.
+plt.plot(dff['SepalLengthCm'],dff['SepalWidthCm'])
+plt.plot(df['Id'],df['SepalWidthCm'],'m')
+plt.xlabel('Id')
+plt.ylabel('Sepal Length (cm)')
+plt.title('Line Plot')
+plt.show()
+
+Scatter Plot-Main Use: Display relationships between two continuous 
+plt.scatter(df['SepalLengthCm'], df['SepalWidthCm'])
+plt.xlabel('Sepal Length (cm)')
+plt.ylabel('Sepal Width (cm)')
+plt.title('Scatter Plot')
+plt.show()
+
+
+Bar Plot-Main Use: Compare categorical data.
+plt.bar(df['Species'], df['SepalLengthCm'])
+plt.xlabel('Species')
+plt.ylabel('Sepal Length (cm)')
+plt.title('Bar Plot')
+plt.xticks(rotation=45)
+plt.show()
+
+Histogram- Visualize the distribution of continuous data.
+
+plt.hist(df['PetalLengthCm'], bins=10)
+plt.xlabel('Petal Length (cm)')
+plt.ylabel('Frequency')
+plt.title('Histogram')
+plt.show()
+
+Box Plot- (for outlier detection)
+plt.boxplot(df['PetalWidthCm'])
+plt.ylabel('Petal Width (cm)')
+plt.title('Box Plot')
+plt.show()
+
+Violin Plot- Combine features of box plots and kernel density plots to show the distribution of data.
+
+plt.violinplot(df['PetalWidthCm'])
+plt.ylabel('Petal Width (cm)')
+plt.title('Violin Plot')
+plt.show()
+
+Pie Chart-Display the composition of a categorical variable.
+import matplotlib.pyplot as plt
+plt.pie(df['SepalLengthCm'], labels=df['Species'], autopct='%1.1f%%')
+plt.title('Pie Chart')
+plt.show()
+
+Polar Plot-Display data in polar coordinates.
+import numpy as np
+import matplotlib.pyplot as plt
+theta = np.linspace(0, 2*np.pi, len(df))
+r = df['SepalWidthCm']
+plt.polar(theta, r)
+plt.title('Polar Plot')
+plt.show()
+
+
+Contour Plot-Display 3D data on a 2D plane using contours.
+import matplotlib.pyplot as plt
+import numpy as np
+X, Y = np.meshgrid(df['SepalLengthCm'], df['SepalWidthCm'])
+Z = np.sin(X) * np.cos(Y)
+plt.contour(X, Y, Z)
+plt.xlabel('Sepal Length (cm)')
+plt.ylabel('Sepal Width (cm)')
+plt.title('Contour Plot')
+plt.show()
+
+Quiver Plot-Display vector fields.
+import matplotlib.pyplot as plt
+import numpy as np
+X, Y = np.meshgrid(np.arange(-2, 2, 0.2), np.arange(-2, 2, 0.2))
+U = np.cos(X)
+V = np.sin(Y)
+plt.quiver(X, Y, U, V)
+plt.title('Quiver Plot')
+plt.show()
+
+Stream Plot-Display streamlines of a vector field.
+import matplotlib.pyplot as plt
+import numpy as np
+Y, X = np.mgrid[-3:3:100j, -3:3:100j]
+U = -1 - X**2 + Y
+V = 1 + X - Y**2
+plt.streamplot(X, Y, U, V)
+plt.title('Stream Plot')
+plt.show()
+
+Surface Plot -Visualize a 3D surface plot.
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+import numpy as np
+X = np.arange(-5, 5, 0.25)
+Y = np.arange(-5, 5, 0.25)
+X, Y = np.meshgrid(X, Y)
+Z = np.sin(np.sqrt(X**2 + Y**2))
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+ax.plot_surface(X, Y, Z)
+ax.set_xlabel('X axis')
+ax.set_ylabel('Y axis')
+ax.set_zlabel('Z axis')
+plt.title('Surface Plot')
+plt.show()
+
+3D Plot - Display 3D scatter plots.
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+x = df['SepalLengthCm']
+y = df['SepalWidthCm']
+z = df['PetalLengthCm']
+ax.scatter(x, y, z)
+ax.set_xlabel('Sepal Length (cm)')
+ax.set_ylabel('Sepal Width (cm)')
+ax.set_zlabel('Petal Length (cm)')
+plt.title('3D Scatter Plot')
+plt.show()
+
+Error Bar Plot - Display uncertainties or variability of data.
+import matplotlib.pyplot as plt
+plt.errorbar(df['Id'], df['SepalLengthCm'], yerr=0.1, fmt='o')
+
+Stem Plot
+Step Plot
+Area Plot
+
+Hexbin Plot - Display the relationship between two variables as hexagons.
+import matplotlib.pyplot as plt
+import numpy as np
+x = np.random.randn(1000)
+y = np.random.randn(1000)
+plt.hexbin(x, y, gridsize=20)
+plt.colorbar()
+plt.title('Hexbin Plot')
+plt.show()
+
+
+Stack Plot- Display the contribution of each part over time.
+import matplotlib.pyplot as plt
+days = range(1, 6)
+tasks = ['Task1', 'Task2', 'Task3']
+task1 = [8, 6, 5, 3, 2]
+task2 = [2, 3, 4, 5, 6]
+task3 = [7, 8, 5, 3, 1]
+plt.stackplot(days, task1, task2, task3, labels=tasks)
+plt.legend(loc='upper left')
+plt.xlabel('Days')
+plt.ylabel('Tasks')
+plt.title('Stack Plot')
+plt.show()
+
+Stackbar Plot -Display the composition of multiple categories over different groups.
+import matplotlib.pyplot as plt
+
+# Sample data
+categories = ['A', 'B', 'C', 'D']
+values1 = [20, 35, 30, 25]
+values2 = [15, 25, 35, 20]
+
+plt.bar(categories, values1, label='Group 1')
+plt.bar(categories, values2, bottom=values1, label='Group 2')
+plt.xlabel('Categories')
+plt.ylabel('Values')
+plt.title('Stacked Bar Plot')
+plt.legend()
+plt.show()
+
+Ternary Plot-Visualize data in a triangular coordinate system.
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Sample data
+x = np.random.rand(10)
+y = np.random.rand(10)
+z = np.random.rand(10)
+
+plt.figure()
+plt.triplot(x, y)
+plt.scatter(x, y, c=z, cmap='viridis')
+plt.colorbar(label='Z')
+plt.title('Ternary Plot')
+plt.show()
+
+Parallel Coordinates Plot - Visualize multivariate data across multiple dimensions.
+from pandas.plotting import parallel_coordinates
+import matplotlib.pyplot as plt
+
+# Sample data (assuming 'df' is the DataFrame containing the data)
+parallel_coordinates(df, 'Species')
+plt.title('Parallel Coordinates Plot')
+plt.show()
+
+Scatter Matrix Plot-Visualize pairwise relationships between variables in a dataset.
+import seaborn as sns
+
+# Sample data (assuming 'df' is the DataFrame containing the data)
+sns.pairplot(df)
+plt.title('Scatter Matrix Plot')
+plt.show()
+
+Radar Chart- Display multivariate data on a two-dimensional chart.
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Sample data
+labels=np.array(['A', 'B', 'C', 'D'])
+stats=np.array([20, 35, 30, 35])
+angles=np.linspace(0, 2*np.pi, len(labels), endpoint=False).tolist()
+stats=np.concatenate((stats,[stats[0]]))
+angles=np.concatenate((angles,[angles[0]]))
+
+fig, ax = plt.subplots(figsize=(6, 6), subplot_kw=dict(polar=True))
+ax.fill(angles, stats, color='red', alpha=0.25)
+ax.plot(angles, stats, color='red', linewidth=2)
+plt.title('Radar Chart')
+plt.show()
+
+Waterfall Plot-Visualize financial data to understand the cumulative effect of sequentially introduced positive or negative values.
+import matplotlib.pyplot as plt
+
+# Sample data
+categories = ['Start', 'A', 'B', 'C', 'D', 'End']
+values = [0, 20, -10, 15, -5, 25]
+
+plt.bar(categories, values, color=['blue' if v >= 0 else 'red' for v in values])
+plt.xlabel('Categories')
+plt.ylabel('Values')
+plt.title('Waterfall Plot')
+plt.show()
+
+
+
+Seaborn Plots:
+Relational Plots
+
+Scatter Plot -Visualize the relationship between two variables.
+ 
+Line Plot
+
+Joint Plot-Display the relationship between two variables along with their univariate distributions.
+import seaborn as sns
+sns.jointplot(x='SepalLengthCm', y='SepalWidthCm', data=df)
+plt.title('Joint Plot')
+plt.show()
+
+
+Pair Plot -Visualize pairwise relationships between variables.
+import seaborn as sns
+sns.pairplot(df, hue='Species')
+plt.title('Pair Plot')
+plt.show()
+
+
+Categorical Plots
+
+Bar Plot
+
+Count Plot-Display the count of observations in each category.
+import seaborn as sns
+sns.countplot(x='Species', data=df)
+plt.title('Count Plot')
+plt.show()
+
+Box Plot
+
+Violin Plot - Display the distribution of data within categories with a Kernel Density Estimate.
+import seaborn as sns
+sns.violinplot(x='Species', y='SepalLengthCm', data=df)
+plt.title('Violin Plot')
+plt.show()
+
+
+Strip Plot-Display the distribution of a continuous variable.
+import seaborn as sns
+sns.stripplot(x='Species', y='SepalLengthCm', data=df)
+plt.title('Strip Plot')
+plt.show()
+
+Swarm Plot - Display the distribution of categorical data along a numerical axis.
+import seaborn as sns
+sns.swarmplot(x='Species', y='PetalLengthCm', data=df)
+plt.title('Swarm Plot')
+plt.show()
+
+Point Plot - Display point estimates and confidence intervals as lines.
+import seaborn as sns
+sns.pointplot(x='Species', y='SepalLengthCm', data=df)
+plt.title('Point Plot')
+plt.show()
+
+Distribution Plots:
+
+Histogram
+
+KDE Plot -Display the distribution of a single variable with a Kernel Density Estimate.
+import seaborn as sns
+sns.kdeplot(df['SepalLengthCm'], shade=True)
+plt.title('KDE Plot')
+plt.show()
+
+
+Rug Plot -Display the distribution of a single variable along the x-axis.
+
+Dist Plot -Combine histogram with a KDE plot.
+import seaborn as sns
+sns.distplot(df['SepalLengthCm'], bins=10, kde=True)
+plt.title('Dist Plot')
+plt.show()
+
+Matrix Plots - Visualize data in a matrix format with colored cells.
+import seaborn as sns
+sns.heatmap(df.corr(), annot=True, cmap='coolwarm')
+plt.title('Heatmap')
+plt.show()
+
+
+Heatmap 
+
+Clustermap- Display a matrix dataset as a hierarchically-clustered heatmap.
+import seaborn as sns
+sns.clustermap(df.corr(), cmap='coolwarm', annot=True)
+plt.title('Clustermap')
+plt.show()
+
+Regression Plots
+
+LM Plot -Display a matrix dataset as a hierarchically-clustered heatmap.
+import seaborn as sns
+sns.clustermap(df.corr(), cmap='coolwarm', annot=True)
+plt.title('Clustermap')
+plt.show()
+
+Reg Plot -Visualize the relationship between two variables along with a linear regression line and confidence interval.
+import seaborn as sns
+sns.regplot(x='SepalLengthCm', y='SepalWidthCm', data=df)
+plt.title('Reg Plot')
+plt.show()
+
+Resid Plot-Visualize the residuals of a linear regression.
+
+Time Series Plots
+import seaborn as sns
+sns.residplot(x='SepalLengthCm', y='SepalWidthCm', data=df)
+plt.title('Resid Plot')
+plt.show()
+
+Time Series Plot - Visualize time-series data.
+import seaborn as sns
+sns.lineplot(data=df['SepalLengthCm'])
+plt.title('Time Series Plot')
+plt.show()
+
+Lmplot -Visualize time-series data with a linear regression line.
+import seaborn as sns
+sns.lmplot(x='Id', y='SepalLengthCm', data=df)
+plt.title('Lmplot')
+plt.show()
+
+Others
+
+Facet Grid-Visualize the distribution of a variable across multiple subsets of the dataset
+import seaborn as sns
+g = sns.FacetGrid(df, col="Species")
+g.map(sns.histplot, "SepalLengthCm")
+plt.show()
+
+Pair Grid -Visualize pairwise relationships in a grid format.
+import seaborn as sns
+g = sns.PairGrid(df)
+g.map_upper(sns.scatterplot)
+g.map_lower(sns.kdeplot)
+g.map_diag(sns.histplot)
+plt.show()
+
+Joint Grid-Visualize joint plots across multiple subsets of the dataset.
+import seaborn as sns
+g = sns.JointGrid(data=df, x="SepalLengthCm", y="SepalWidthCm")
+g.plot(sns.scatterplot, sns.histplot)
+plt.show()
+
